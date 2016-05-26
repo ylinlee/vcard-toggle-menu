@@ -1,13 +1,14 @@
-## Vcard home
+## Vcard toggle menu
 To try demo you need in your application:
   -  jquery
   -  bootstrap
   -  font-awesome
+  -  iron-media-query
   -  webcomponentsjs
   -  polymer
 
 Put in your navigator:
-> http://localhost:8000/bower_components/vcard-home/demo/index.html
+> http://localhost:8000/bower_components/vcard-toggle-menu/demo/index.html
 
 ## Firing up a server using Python
 
