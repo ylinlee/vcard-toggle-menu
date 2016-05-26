@@ -1,0 +1,250 @@
+<!-- Imports polymer -->
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-media-query/iron-media-query.html">
+<!-- Defines element markup -->
+<dom-module id="vcard-toggle-menu">
+    <template>
+        <style>
+    .toggle-btn {
+            position: fixed;
+            z-index: 999;
+            top: 0;
+            right: 0;
+            background: #fff;
+            width: 60px;
+            height: 60px;
+            margin: 0;
+            padding: 0;
+            border: none;
+            line-height: 60px;
+            -webkit-transition: linear .2s;
+            -moz-transition: linear .2s;
+            -o-transition: linear .2s;
+            transition: linear .2s;
+        }
+        
+        .toggle-close,
+        .toggle-close .lines {
+            background: 0 0;
+        }
+        
+        .toggle-close .lines::before {
+            -webkit-transform: rotate3d(0, 0, 1, 45deg);
+            transform: rotate3d(0, 0, 1, 45deg);
+        }
+        
+        .toggle-close .lines::after {
+            -webkit-transform: rotate3d(0, 0, 1, -45deg);
+            transform: rotate3d(0, 0, 1, -45deg);
+        }
+        
+        .toggle-close .lines::after,
+        .toggle-close .lines::before {
+            top: 0;
+            -webkit-transform-origin: 50% 50%;
+            transform-origin: 50% 50%;
+        }
+        
+        .toggle-btn:focus {
+            outline: 0;
+        }
+        
+        .lines {
+            padding: 0;
+            position: relative;
+            vertical-align: middle;
+        }
+        
+        .lines,
+        .lines::after,
+        .lines::before {
+            background: #141414;
+            width: 20px;
+            height: 2px;
+            display: inline-block;
+        }
+        
+        .lines::before {
+            top: 5px;
+        }
+        
+        .lines::after {
+            top: -5px;
+        }
+        
+        .lines::after,
+        .lines::before {
+            position: absolute;
+            content: '';
+            left: 0;
+        }
+        
+        .lines::after,
+        .lines::before,
+        .toggle-btn {
+            -webkit-transition: linear .2s;
+            -moz-transition: linear .2s;
+            -o-transition: linear .2s;
+            transition: linear .2s;
+        }
+        
+        .menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 998;
+            background: #fff;
+            width: 100%;
+            -webkit-transform: translateY(-100%);
+            -moz-transform: translateY(-100%);
+            -ms-transform: translateY(-100%);
+            transform: translateY(-100%);
+        }
+        
+        .show-menu {
+            -webkit-transform: translateY(0);
+            -moz-transform: translateY(0);
+            -ms-transform: translateY(0);
+            transform: translateY(0);
+        }
+        
+        .nav {
+            text-align: center;
+        }
+        
+        .nav li {
+            line-height: 20px;
+            letter-spacing: 1px;
+            font-weight: 600;
+            text-transform: uppercase;
+            list-style-type: none;
+        }
+        
+        .nav li a {
+            position: relative;
+            color: #141414;
+            padding: 0;
+        }
+        
+        .nav li a:focus,
+        .nav li a:hover {
+            background: 0 0
+        }
+        
+        .menu[media-query-768] {
+            height: 60px;
+        }
+        
+        .nav[media-query-768] li {
+            display: inline-block;
+            margin: 0 10px;
+            padding: 20px 0;
+        }
+        
+        .nav[media-query-992] li a::before {
+            width: 0;
+            padding: 10px 0;
+            border-bottom: 1px solid #1e1e1e;
+            -webkit-transition: ease-out .3s;
+            -moz-transition: ease-out .3s;
+            -o-transition: ease-out .3s;
+            transition: ease-out .3s;
+            position: absolute;
+            content: '';
+            top: 0;
+            left: 0;
+        }
+        
+        .nav[media-query-992] li a:hover::before,
+        .nav[media-query-992] li.active a::before {
+            width: 100%;
+        }
+        
+        .nav[media-query-991] li a {
+            border-bottom: 1px solid transparent;
+            -webkit-transition: linear .2s;
+            -moz-transition: linear .2s;
+            -o-transition: linear .2s;
+            transition: linear .2s
+        }
+        
+        .nav[media-query-991] li a:hover,
+        .nav[media-query-991] li.active a {
+            border-color: #1e1e1e
+        }
+    }
+    /*}*/
+        </style>
+        <!-- Así mostramos las variables definidas {{}} -->
+        <!-- Toggle Menu -->
+        <iron-media-query query="(min-width: 768px)" query-matches="{{mediaQuery768}}"></iron-media-query>
+        <iron-media-query query="(min-width: 992px)" query-matches="{{mediaQuery992}}"></iron-media-query>
+        <iron-media-query query="(max-width:991px)" query-matches="{{mediaQuery991}}"></iron-media-query>
+        <button id="toggle-btn" class="toggle-btn" on-click="handlerClickToggleBtn">
+            <span class="lines"></span>
+        </button>
+        <div id="menu" class="menu" media-query-768$="{{mediaQuery768}}">
+            <ul class="nav" media-query-768$="{{mediaQuery768}}" media-query-992$="{{mediaQuery992}}" media-query-991$="{{mediaQuery991}}">
+                <template is="dom-repeat" items="{{menuOptions}}">
+                    <li class="menu-item">
+                        <a href="{{item.href}}" on-click="handlerClickA">{{item.label}}</a>
+                    </li>
+                </template>
+            </ul>
+        </div>
+        <!-- end Toggle menu -->
+    </template>
+</dom-module>
+<!-- Registers custom element -->
+<script>
+Polymer({
+    is: 'vcard-toggle-menu', //Registramos el nombre del componente
+    properties: { //Propiedades del componente
+        show_menu: {
+            type: Boolean, //Propiedad (o atributo) llamado 'nombre' de tipo String 
+            value: false //y valor por defecto
+        },
+        menuOptions: {
+            type: Array,
+            value: [{
+                href: '#home',
+                label: 'Home'
+            }, {
+                href: '#experience',
+                label: 'Experiencia'
+            }, {
+                href: '#education',
+                label: 'Educación'
+            }, {
+                href: '#project',
+                label: 'Proyectos'
+            }]
+        }
+    },
+    handlerClickToggleBtn: function(e, detail) {
+        //var menu = $$('.menu'), btn = $$('.toggle-btn');
+        this.toggleMenu();
+        e.stopPropagation();
+    },
+    toggleMenu: function() {
+        this.show_menu = !this.show_menu;
+        this.toggleClass('show-menu', this.show_menu, this.$$('.menu'));
+        this.toggleClass('toggle-close', this.show_menu, this.$$('.toggle-btn'));
+    },
+    handlerClickA: function(e, detail) {
+        $('.menu-item').removeClass('active');
+        $(e.target).parent().addClass('active');
+        if ($(e.target.hash).offset()) {
+            var scrolltop = $(e.target.hash).offset().top;
+            if ($(window).width() >= 768) {
+                scrolltop = scrolltop - 50;
+            }
+            $("html,body").animate({
+                scrollTop: scrolltop
+            }, 800, 'easeInOutQuart');
+            e.preventDefault();
+        }
+
+    }
+});
+</script>
