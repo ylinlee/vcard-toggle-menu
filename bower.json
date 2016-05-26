@@ -1,7 +1,7 @@
 {
-  "name": "vcard-home",
+  "name": "vcard-toggle-menu",
   "version": "0.0.1",
-  "description": "Home",
+  "description": "Toggle menu",
   "private": true,
   "authors": [
     "YCLIN"
@@ -11,10 +11,10 @@
     "polymer",
     "vcard"
   ],
-  "main": "vcard-home.html",
+  "main": "vcard-toggle-menu.html",
   "repository": {
     "type": "git",
-    "url": "git://github.com/vcard/vcard-home.git"
+    "url": "git://github.com/vcard/vcard-toggle-menu.git"
   },
   "license": "MIT",
   "ignore": [],
