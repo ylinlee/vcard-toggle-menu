@@ -8,7 +8,7 @@ To try demo you need in your application:
   -  polymer
 
 Put in your navigator:
-> http://localhost:8000/bower_components/vcard-toggle-menu/demo/index.html
+> http://localhost:8080/bower_components/vcard-toggle-menu/demo/index.html
 
 ## Firing up a server using Python
 
