@@ -14,16 +14,11 @@
   "main": "vcard-home.html",
   "repository": {
     "type": "git",
-    "url": "git://github.com/vcard/vcard-home.git"
+    "url": "https://github.com/ylinlee/vcard-home.git"
   },
   "license": "MIT",
   "ignore": [],
   "dependencies": {
-    "promise-polyfill": "polymerlabs/promise-polyfill#^1.0.0",
-    "polymer": "Polymer/polymer#^1.0.0"
-  },
-  "devDependencies": {
-    "web-component-tester": "polymer/web-component-tester#^3.4.0",
-    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
+        "polymer": "Polymer/polymer#1.0.0"
   }
 }
