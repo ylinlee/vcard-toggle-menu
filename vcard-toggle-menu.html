@@ -172,19 +172,41 @@
         .nav[media-query-991] li.active a {
             border-color: #1e1e1e
         }
-    }
-    /*}*/
+        
+        .nav[media-query-767] {
+            position: relative;
+            top: 50%;
+            -webkit-transform: translate(0, -50%);
+            -moz-transform: translate(0, -50%);
+            -ms-transform: translate(0, -50%);
+            -o-transform: translate(0, -50%);
+            transform: translate(0, -50%);
+        }
+        
+        .menu[media-query-767] {
+            height: 100%;
+            -webkit-transition: ease-out .3s;
+            -moz-transition: ease-out .3s;
+            -o-transition: ease-out .3s;
+            transition: ease-out .3s;
+        }
+        
+        .nav[media-query-767] li {
+            display: table;
+            margin: 0 auto 15px;
+        }
         </style>
         <!-- Así mostramos las variables definidas {{}} -->
         <!-- Toggle Menu -->
+        <iron-media-query query="(max-width: 767px)" query-matches="{{mediaQuery767}}"></iron-media-query>
         <iron-media-query query="(min-width: 768px)" query-matches="{{mediaQuery768}}"></iron-media-query>
         <iron-media-query query="(min-width: 992px)" query-matches="{{mediaQuery992}}"></iron-media-query>
         <iron-media-query query="(max-width:991px)" query-matches="{{mediaQuery991}}"></iron-media-query>
         <button id="toggle-btn" class="toggle-btn" on-click="handlerClickToggleBtn">
             <span class="lines"></span>
         </button>
-        <div id="menu" class="menu" media-query-768$="{{mediaQuery768}}">
-            <ul class="nav" media-query-768$="{{mediaQuery768}}" media-query-992$="{{mediaQuery992}}" media-query-991$="{{mediaQuery991}}">
+        <div id="menu" class="menu" media-query-767$="{{mediaQuery767}}" media-query-768$="{{mediaQuery768}}">
+            <ul class="nav" media-query-767$="{{mediaQuery767}}" media-query-768$="{{mediaQuery768}}" media-query-992$="{{mediaQuery992}}" media-query-991$="{{mediaQuery991}}">
                 <template is="dom-repeat" items="{{menuOptions}}">
                     <li class="menu-item">
                         <a href="{{item.href}}" on-click="handlerClickA">{{item.label}}</a>
@@ -244,6 +266,7 @@ Polymer({
             }, 800, 'easeInOutQuart');
             e.preventDefault();
         }
+        return false;
 
     }
 });
